@@ -24,6 +24,7 @@ class WeatherCrawler(object):
         raise ResponseTimeout()
     
     def get_data(self):
+        print('crawling start')
         request = self.connect_url(self.url)
         documents = bs(request.content, "html.parser").find_all('location')
         for document in documents:
@@ -44,6 +45,7 @@ class WeatherCrawler(object):
         # return self.weather_data
         
     def start(self):
+        print('weather_crawler start')
         return self.get_data()
         
 
