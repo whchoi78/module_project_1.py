@@ -6,7 +6,6 @@ from weather_crawler.RSS_Crawler import WeatherCrawler
 import os
 
 def crawl():
-    print('do crawl')
     mysql = MySQLDB(
         host = "airflow_mysql_1",
         port = 3306,
@@ -28,11 +27,9 @@ dag = DAG(dag_id="crawl_weather",
               "owner": "Group_6",
               "start_date": datetime(2021, 4, 1, 0, 0, 0)
           },
-          #schedule_interval=("59 * * * *"),
           schedule_interval=timedelta(hours=3),
           description="Crawl weather data on Korea Meteorological Administration site")
 
-print(datetime.today())
 crawl = PythonOperator(task_id="WeatherCrawler",
                        python_callable=crawl,
                        dag=dag)
