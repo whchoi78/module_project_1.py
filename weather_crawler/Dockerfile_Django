@@ -1,0 +1,6 @@
+FROM python:3
+ENV PYTHONUNBUFFERED=1
+WORKDIR /code
+COPY ./Requirements/django_requirements.txt /code/
+RUN pip install -r django_requirements.txt
+COPY ./django_code/ /code/

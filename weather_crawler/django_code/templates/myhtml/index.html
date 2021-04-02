@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+인덱스 페이지 입니다.
+{% for values in weather %}
+<table border="1">
+	<tr>
+	<th colspan="2">{{values.dist}}</th>
+	</tr>
+	<tr>
+	<th colspan="2">{{values.weather_time}}</th>
+	</tr>
+	<tr>
+	<th>날씨</th><th>{{values.weather_sky}}</th>
+	</tr>
+	<tr>
+	<th>최고기온</th><th>{{values.temp_max}}</th>
+	</tr>
+	<tr>
+	<th>최저기온</th><th>{{values.temp_min}}</th>
+	</tr>
+	<tr>
+	<th>강수확률</th><th>{{values.rnst}}</th>
+	</tr>
+	</table>
+	<br>	
+	{% endfor %}
+</body>
+</html>
