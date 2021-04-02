@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql
+    ports:v
+      - '3306:3306'
+    environment: 
+       MYSQL_ROOT_PASSWORD: password
+       MYSQL_DATABASE: mydb
+       MYSQL_USER: mysql
+       MYSQL_PASSWORD: mysql
+    volumes:
+      - .:/docker-entrypoint-initdb.d/
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8282:8000"
+    depends_on:
+      - mysql
+
