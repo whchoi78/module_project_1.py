@@ -1,9 +1,8 @@
 from bs4 import BeautifulSoup as bs
 from datetime import datetime, timedelta, date
-from exceptions import *
+from .exceptions import *
 import pymysql
 import requests
-import urllib.request as ur
 
 class WeatherCrawler(object):
     def __init__ (self, write_handler=None):
@@ -11,6 +10,7 @@ class WeatherCrawler(object):
         self.datetime = datetime.today()
         self.weather_data = []
         self.write_handler = write_handler
+        print('get crawler')
 
     @staticmethod
     def connect_url(url, max_tries=5):

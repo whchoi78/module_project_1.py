@@ -1,21 +1,21 @@
-import os
 from airflow.models import DAG
 from airflow.operators.python import PythonOperator
-from datetime import datetime
+from datetime import datetime, timedelta
 from weather_crawler.mysql import MySQLDB
 from weather_crawler.RSS_Crawler import WeatherCrawler
-
+import os
 
 def crawl():
+    print('do crawl')
     mysql = MySQLDB(
-        host = "localhost",
+        host = "airflow_mysql_1",
         port = 3306,
-        user = "root",
-        password = "p@ssw0rd",
+        user = "airflow",
+        password = "airflow",
         database = "mydb"
     )
     
-    def write_row_handler(row: tuple[datetime, str, str, str, str, str]):
+    def write_row_handler(row: tuple):
         mysql.insert_row(row)
 
     crawler = WeatherCrawler(write_row_handler)
@@ -26,11 +26,13 @@ def crawl():
 dag = DAG(dag_id="crawl_weather",
           default_args={
               "owner": "Group_6",
-              "start_date": datetime.today()
+              "start_date": datetime(2021, 4, 1, 0, 0, 0)
           },
-          schedule_interval="3 * * * *",
+          #schedule_interval=("59 * * * *"),
+          schedule_interval=timedelta(hours=3),
           description="Crawl weather data on Korea Meteorological Administration site")
 
+print(datetime.today())
 crawl = PythonOperator(task_id="WeatherCrawler",
                        python_callable=crawl,
                        dag=dag)
