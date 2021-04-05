@@ -1,6 +1,5 @@
 FROM apache/airflow:2.0.1
 USER root
-RUN mkdir /app
 COPY ./Requirements/airflow_requirements.txt /app/airflow_requirements.txt
 WORKDIR /app
 RUN apt-get update -yqq \

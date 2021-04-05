@@ -7,7 +7,7 @@ import os
 
 def crawl():
     mysql = MySQLDB(
-        host = "test_mysql_1",
+        host = "weather_crawler_mysql_1",
         port = 3306,
         user = "airflow",
         password = "airflow",
@@ -25,7 +25,7 @@ def crawl():
 dag = DAG(dag_id="crawl_weather",
           default_args={
               "owner": "Group_6",
-              "start_date": datetime(2021, 4, 1, 0, 0, 0)
+              "start_date": datetime(2021, 4, 4, 0, 0, 0)
           },
           schedule_interval=timedelta(hours=3),
           description="Crawl weather data on Korea Meteorological Administration site")

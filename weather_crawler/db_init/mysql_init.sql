@@ -10,12 +10,12 @@ CREATE TABLE IF NOT EXISTS mydb.mw_table( \
     rnst varchar(20), \
     primary key(weather_time, dist) \
 )ENGINE = InnoDB;
-CREATE USER 'airflow'@'%' identified by 'airflow';
-CREATE USER 'airflow'@'localhost' identified by 'airflow';
+CREATE USER 'airflow'@'%' identified with mysql_native_password  by 'airflow';
+CREATE USER 'airflow'@'localhost' identified with mysql_native_password  by 'airflow';
 GRANT ALL PRIVILEGES ON *.* TO 'airflow'@'%' WITH GRANT OPTION;
 GRANT ALL PRIVILEGES ON *.* TO 'airflow'@'localhost' WITH GRANT OPTION;
-CREATE USER 'django'@'%' identified by 'django';
-CREATE USER 'django'@'localhost' identified by 'django';
+CREATE USER 'django'@'%' identified with mysql_native_password  by 'django';
+CREATE USER 'django'@'localhost' identified with mysql_native_password  by 'django';
 GRANT ALL PRIVILEGES ON *.* TO 'django'@'%' WITH GRANT OPTION;
 GRANT ALL PRIVILEGES ON *.* TO 'django'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
